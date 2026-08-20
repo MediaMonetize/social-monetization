@@ -4,203 +4,706 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MediaMonetize | Login</title>
+<title>MediaMonetize</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 body{
-    font-family:Arial, sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f4f7fb;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
     color:#172033;
 }
 
-.login-box{
-    width:420px;
-    max-width:92%;
-    background:white;
-    padding:35px;
-    border-radius:18px;
-    box-shadow:0 15px 45px rgba(0,0,0,.10);
-}
-
-.logo{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.logo-icon{
-    width:60px;
-    height:60px;
-    margin:0 auto 15px;
-    border-radius:16px;
-    background:#2563eb;
+.top-header{
+    background:linear-gradient(135deg,#111827,#1e293b);
     color:white;
+    padding:26px 30px 18px;
     display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
+    justify-content:space-between;
+    align-items:flex-start;
 }
 
-.logo h1{
-    font-size:28px;
+.brand{
+    font-size:27px;
+    font-weight:800;
+    color:#60a5fa;
 }
 
-.logo h1 span{
-    color:#2563eb;
+.owner{
+    margin-top:30px;
+    padding:7px 12px;
+    border-radius:8px;
+    background:rgba(37,99,235,.18);
+    border:1px solid rgba(96,165,250,.35);
+    color:#dbeafe;
+    font-size:12px;
+    font-weight:700;
 }
 
-.logo p{
-    color:#64748b;
-    margin-top:7px;
+.navbar{
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+    box-shadow:0 3px 15px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.form-group{
-    margin-bottom:18px;
+.nav{
+    max-width:1250px;
+    margin:auto;
+    padding:11px 15px;
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
 }
 
-label{
-    display:block;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:7px;
-}
-
-input{
-    width:100%;
-    padding:13px;
-    border:1px solid #dbe1ea;
-    border-radius:9px;
-    font-size:15px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#2563eb;
-}
-
-button{
-    width:100%;
+.nav button{
     border:0;
+    background:transparent;
+    padding:10px 13px;
+    border-radius:8px;
+    color:#475569;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.nav button:hover,
+.nav button.active{
     background:#2563eb;
     color:white;
-    padding:13px;
-    border-radius:9px;
-    font-size:15px;
-    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+.page{
+    display:none;
+    animation:fade .2s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.page-header{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:22px;
+}
+
+.page-header h1{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.page-header p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:21px;
+    box-shadow:0 4px 16px rgba(0,0,0,.04);
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    margin-bottom:9px;
+}
+
+.card p{
+    color:#64748b;
+    line-height:1.65;
+    font-size:14px;
+}
+
+.copy-btn{
+    width:100%;
+    margin-top:16px;
+    padding:11px;
+    border:0;
+    border-radius:8px;
+    background:#eff6ff;
+    color:#2563eb;
+    font-weight:700;
     cursor:pointer;
 }
 
-button:hover{
-    background:#1d4ed8;
+.copy-btn:hover{
+    background:#2563eb;
+    color:white;
 }
 
-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
+.media{
+    width:100%;
+    height:170px;
+    background:#eef2f7;
+    border-radius:10px;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#64748b;
+    overflow:hidden;
 }
 
-.message{
-    display:none;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:18px;
+.media img,
+.media video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.text-box{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    padding:14px;
+    border-radius:9px;
+    color:#475569;
+    line-height:1.65;
     font-size:14px;
 }
 
-.message.error{
-    display:block;
-    background:#fee2e2;
-    color:#991b1b;
+.country-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.message.success{
-    display:block;
+.country{
+    background:white;
+    border:1px solid #e5e7eb;
+    padding:20px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.country strong{
+    font-size:15px;
+}
+
+.badge{
     background:#dcfce7;
-    color:#166534;
+    color:#15803d;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
 }
 
-.footer{
+.empty{
+    grid-column:1/-1;
+    background:white;
+    border:1px dashed #cbd5e1;
+    border-radius:12px;
+    padding:35px;
     text-align:center;
-    margin-top:22px;
-    color:#94a3b8;
-    font-size:12px;
+    color:#64748b;
+}
+
+.contact{
+    background:linear-gradient(135deg,#111827,#1e293b);
+    color:white;
+    padding:35px;
+    border-radius:17px;
+    text-align:center;
+}
+
+.contact h2{
+    margin-bottom:10px;
+}
+
+.contact p{
+    color:#cbd5e1;
+    margin:7px;
+}
+
+.contact-buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.contact-buttons a{
+    color:white;
+    text-decoration:none;
+    padding:11px 18px;
+    border-radius:8px;
+    background:#2563eb;
+    font-weight:600;
+}
+
+.contact-buttons .email{
+    background:#374151;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+    border-top:1px solid #e5e7eb;
+    color:#64748b;
+    font-size:13px;
+}
+
+@media(max-width:850px){
+
+    .grid,
+    .country-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .top-header{
+        padding:21px 15px 16px;
+    }
+
+    .brand{
+        font-size:21px;
+    }
+
+    .owner{
+        margin-top:25px;
+        font-size:10px;
+        padding:6px 8px;
+    }
+
+    .container{
+        width:94%;
+        margin:22px auto;
+    }
+
+    .grid,
+    .country-grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-header{
+        padding:20px;
+    }
+
+    .page-header h1{
+        font-size:21px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<header class="top-header">
 
-    <div class="logo">
-
-        <div class="logo-icon">
-            📈
-        </div>
-
-        <h1>Media<span>Monetize</span></h1>
-
-        <p>Social Media Monetization Platform</p>
-
+    <div class="brand">
+        MediaMonetize
     </div>
 
-    <div id="message" class="message"></div>
+    <div class="owner">
+        Owner: Chaudhary Ali Hassan
+    </div>
 
-    <form id="loginForm">
+</header>
 
-        <div class="form-group">
 
-            <label for="email">
-                Email
-            </label>
+<nav class="navbar">
 
-            <input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                required
-            >
+    <div class="nav">
 
-        </div>
+        <button class="active" data-page="home">🏠 Home</button>
 
-        <div class="form-group">
-
-            <label for="password">
-                Password
-            </label>
-
-            <input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                required
-            >
-
-        </div>
-
-        <button
-            id="loginBtn"
-            type="submit"
-        >
-            Login
+        <button data-page="top-content">
+            🔥 Top Content
         </button>
 
-    </form>
+        <button data-page="hashtags">
+            #️⃣ Top Hashtags
+        </button>
 
-    <div class="footer">
-        MediaMonetize • Content & Monetization Management
+        <button data-page="rpm">
+            💰 RPM / CPM
+        </button>
+
+        <button data-page="prompts">
+            🎬 Video Prompts
+        </button>
+
+        <button data-page="countries">
+            🌎 Premium Countries
+        </button>
+
+        <button data-page="local">
+            🗣️ Local Content
+        </button>
+
+        <button data-page="news">
+            📰 News & Trends
+        </button>
+
+        <button data-page="ideas">
+            💡 Content Ideas
+        </button>
+
+        <button data-page="contact">
+            🆘 Contact
+        </button>
+
     </div>
 
-</div>
+</nav>
+
+
+<main class="container">
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+    <div class="page-header">
+
+        <h1>Welcome to MediaMonetize</h1>
+
+        <p>
+            Discover the latest video prompts, hashtags,
+            premium markets, content ideas and social-media
+            resources in one place.
+        </p>
+
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">🔥</div>
+            <h3>Top Content</h3>
+            <p>
+                Featured content and media selected
+                for creators.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎬</div>
+            <h3>Video Prompts</h3>
+            <p>
+                Latest ready-to-use prompts for
+                short-form videos.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">#️⃣</div>
+            <h3>Top Hashtags</h3>
+            <p>
+                Platform-specific hashtags ready
+                to copy.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TOP CONTENT -->
+
+<section id="top-content" class="page">
+
+    <div class="page-header">
+
+        <h1>🔥 Top Content</h1>
+
+        <p>
+            Latest featured photos, videos and
+            premium content.
+        </p>
+
+    </div>
+
+    <div id="topContentList" class="grid">
+
+        <div class="empty">
+            Loading content...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HASHTAGS -->
+
+<section id="hashtags" class="page">
+
+    <div class="page-header">
+
+        <h1>#️⃣ Top Hashtags</h1>
+
+        <p>
+            Copy the latest hashtags for each platform.
+        </p>
+
+    </div>
+
+    <div id="hashtagsList" class="grid">
+
+        <div class="empty">
+            Loading hashtags...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RPM -->
+
+<section id="rpm" class="page">
+
+    <div class="page-header">
+
+        <h1>💰 High RPM / CPM</h1>
+
+        <p>
+            High-value advertising markets and
+            monetization information.
+        </p>
+
+    </div>
+
+    <div id="rpmList" class="country-grid">
+
+        <div class="empty">
+            Loading RPM / CPM data...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROMPTS -->
+
+<section id="prompts" class="page">
+
+    <div class="page-header">
+
+        <h1>🎬 Newest Video Prompts</h1>
+
+        <p>
+            Latest prompts published for content creators.
+        </p>
+
+    </div>
+
+    <div id="promptsList" class="grid">
+
+        <div class="empty">
+            Loading prompts...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PREMIUM COUNTRIES -->
+
+<section id="countries" class="page">
+
+    <div class="page-header">
+
+        <h1>🌎 Premium Countries</h1>
+
+        <p>
+            Premium audience markets for content targeting.
+        </p>
+
+    </div>
+
+    <div id="countriesList" class="country-grid">
+
+        <div class="empty">
+            Loading countries...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOCAL -->
+
+<section id="local" class="page">
+
+    <div class="page-header">
+
+        <h1>🗣️ Local Content</h1>
+
+        <p>
+            Local-language scripts, hooks, captions
+            and content resources.
+        </p>
+
+    </div>
+
+    <div id="localList" class="grid">
+
+        <div class="empty">
+            Loading local content...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWS -->
+
+<section id="news" class="page">
+
+    <div class="page-header">
+
+        <h1>📰 News & Trends</h1>
+
+        <p>
+            Latest social-media trends and
+            content opportunities.
+        </p>
+
+    </div>
+
+    <div id="newsList" class="grid">
+
+        <div class="empty">
+            Loading news...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- IDEAS -->
+
+<section id="ideas" class="page">
+
+    <div class="page-header">
+
+        <h1>💡 Content Ideas</h1>
+
+        <p>
+            Ready-to-use ideas for social-media creators.
+        </p>
+
+    </div>
+
+    <div id="ideasList" class="grid">
+
+        <div class="empty">
+            Loading ideas...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="page">
+
+    <div class="page-header">
+
+        <h1>🆘 Contact & Support</h1>
+
+        <p>
+            Contact the owner for questions,
+            requests or support.
+        </p>
+
+    </div>
+
+    <div class="contact">
+
+        <h2>Chaudhary Ali Hassan</h2>
+
+        <p>Owner — MediaMonetize</p>
+
+        <p>WhatsApp: +966596401934</p>
+
+        <p>Email: alihassantoor1290@gmail.com</p>
+
+        <div class="contact-buttons">
+
+            <a
+                href="https://wa.me/966596401934"
+                target="_blank">
+                💬 WhatsApp
+            </a>
+
+            <a
+                class="email"
+                href="mailto:alihassantoor1290@gmail.com">
+                📧 Email
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+    © 2026 MediaMonetize
+</footer>
 
 
 <script type="module">
@@ -210,15 +713,20 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBDXnSHJmBqnZd97NCDuLAI6lcjLrdV3m4",
+    apiKey:
+        "AIzaSyBDXnSHJmBqnZd97NCDuLAI6lcjLrdV3m4",
 
     authDomain:
         "social-monetization-os.firebaseapp.com",
@@ -241,132 +749,733 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-const auth =
-    getAuth(app);
+const db =
+    getFirestore(app);
 
 
-const form =
-    document.getElementById("loginForm");
+/* ================= NAVIGATION ================= */
 
-const button =
-    document.getElementById("loginBtn");
+const navButtons =
+    document.querySelectorAll("[data-page]");
 
-const message =
-    document.getElementById("message");
-
-
-function showMessage(text,type){
-
-    message.innerText = text;
-
-    message.className =
-        "message " + type;
-
-}
+const pages =
+    document.querySelectorAll(".page");
 
 
-/* CHECK EXISTING LOGIN */
+navButtons.forEach(button => {
 
-onAuthStateChanged(auth,(user)=>{
+    button.addEventListener("click", () => {
 
-    if(user){
+        const target =
+            button.dataset.page;
 
-        window.location.href =
-            "admin.html";
 
-    }
+        navButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+
+        button.classList.add("active");
+
+
+        pages.forEach(page => {
+
+            page.classList.toggle(
+                "active",
+                page.id === target
+            );
+
+        });
+
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    });
 
 });
 
 
-/* LOGIN */
+/* ================= COPY ================= */
 
-form.addEventListener(
-    "submit",
-    async(event)=>{
+window.copyText = function(text){
 
-        event.preventDefault();
+    navigator.clipboard.writeText(text)
+    .then(() => {
 
-        const email =
-            document.getElementById("email")
-            .value
-            .trim();
+        alert("Copied successfully!");
 
-        const password =
-            document.getElementById("password")
-            .value;
+    })
+    .catch(() => {
 
+        alert("Copy failed.");
 
-        button.disabled = true;
+    });
 
-        button.innerText =
-            "Logging in...";
+};
 
 
-        try{
+/* ================= SAFE FIRESTORE ================= */
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+async function getCollection(name){
 
-            showMessage(
-                "Login successful! Opening dashboard...",
-                "success"
-            );
+    try{
 
-            setTimeout(()=>{
+        const reference =
+            collection(db,name);
 
-                window.location.href =
-                    "admin.html";
+        const snapshot =
+            await getDocs(reference);
 
-            },700);
+        return snapshot.docs.map(doc => ({
 
+            id:doc.id,
+            ...doc.data()
 
-        }catch(error){
+        }));
 
-            console.error(error);
+    }catch(error){
 
-            let text =
-                "Login failed. Please check your email and password.";
+        console.error(
+            "Firestore error:",
+            name,
+            error
+        );
 
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
-
-                text =
-                    "Email ya password ghalat hai.";
-
-            }
-
-            if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
-
-                text =
-                    "Too many attempts. Thori dair baad try karo.";
-
-            }
-
-            showMessage(
-                text,
-                "error"
-            );
-
-        }
-
-
-        button.disabled = false;
-
-        button.innerText =
-            "Login";
+        return [];
 
     }
 
-);
+}
+
+
+/* ================= IMAGE / VIDEO ================= */
+
+function mediaHTML(item){
+
+    const url =
+        item.imageUrl ||
+        item.image ||
+        item.mediaUrl ||
+        "";
+
+    if(!url){
+
+        return `
+            <div class="media">
+                🖼️ Content
+            </div>
+        `;
+
+    }
+
+
+    const lower =
+        url.toLowerCase();
+
+
+    if(
+        lower.endsWith(".mp4") ||
+        lower.endsWith(".webm") ||
+        lower.includes("video")
+    ){
+
+        return `
+            <div class="media">
+                <video
+                    src="${url}"
+                    controls>
+                </video>
+            </div>
+        `;
+
+    }
+
+
+    return `
+        <div class="media">
+            <img
+                src="${url}"
+                alt="Content"
+                onerror="this.style.display='none'">
+        </div>
+    `;
+
+}
+
+
+/* ================= TOP CONTENT ================= */
+
+async function loadTopContent(){
+
+    const container =
+        document.getElementById("topContentList");
+
+    const data =
+        await getCollection("topContent");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No top content available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const title =
+                item.title ||
+                "Featured Content";
+
+            const description =
+                item.description ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    ${mediaHTML(item)}
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(description)}
+                    </p>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(description)}'
+                        )">
+                        📋 Copy
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= HASHTAGS ================= */
+
+async function loadHashtags(){
+
+    const container =
+        document.getElementById("hashtagsList");
+
+    const data =
+        await getCollection("hashtags");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No hashtags available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const platform =
+                item.platform ||
+                "Platform";
+
+            const tags =
+                item.hashtags ||
+                item.tags ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    <div class="icon">
+                        #️⃣
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(platform)}
+                    </h3>
+
+                    <div class="text-box">
+                        ${escapeHTML(tags)}
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(tags)}'
+                        )">
+                        📋 Copy Hashtags
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= PROMPTS ================= */
+
+async function loadPrompts(){
+
+    const container =
+        document.getElementById("promptsList");
+
+    const data =
+        await getCollection("prompts");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No video prompts available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const title =
+                item.title ||
+                "Video Prompt";
+
+            const prompt =
+                item.prompt ||
+                item.description ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    <div class="icon">
+                        🎬
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    <div class="text-box">
+                        ${escapeHTML(prompt)}
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(prompt)}'
+                        )">
+                        📋 Copy Prompt
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= COUNTRIES ================= */
+
+async function loadCountries(){
+
+    const container =
+        document.getElementById("countriesList");
+
+    const data =
+        await getCollection("premiumCountries");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No premium countries available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const country =
+                item.country ||
+                item.name ||
+                "Country";
+
+
+            return `
+
+                <div class="country">
+
+                    <strong>
+                        ${escapeHTML(country)}
+                    </strong>
+
+                    <span class="badge">
+                        Premium
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= RPM ================= */
+
+async function loadRPM(){
+
+    const container =
+        document.getElementById("rpmList");
+
+    const data =
+        await getCollection("rpmCpm");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No RPM / CPM information available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const country =
+                item.country ||
+                item.name ||
+                "Country";
+
+            const value =
+                item.value ||
+                item.rpm ||
+                item.cpm ||
+                "Premium";
+
+
+            return `
+
+                <div class="country">
+
+                    <strong>
+                        ${escapeHTML(country)}
+                    </strong>
+
+                    <span class="badge">
+                        ${escapeHTML(String(value))}
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= LOCAL ================= */
+
+async function loadLocal(){
+
+    const container =
+        document.getElementById("localList");
+
+    const data =
+        await getCollection("localContent");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No local content available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const title =
+                item.title ||
+                item.language ||
+                "Local Content";
+
+            const description =
+                item.description ||
+                item.content ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    <div class="icon">
+                        🗣️
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    <div class="text-box">
+                        ${escapeHTML(description)}
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(description)}'
+                        )">
+                        📋 Copy
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= NEWS ================= */
+
+async function loadNews(){
+
+    const container =
+        document.getElementById("newsList");
+
+    const data =
+        await getCollection("news");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No news or trends available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const title =
+                item.title ||
+                "Latest Trend";
+
+            const description =
+                item.description ||
+                item.content ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    <div class="icon">
+                        📰
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(description)}
+                    </p>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(description)}'
+                        )">
+                        📋 Copy
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= IDEAS ================= */
+
+async function loadIdeas(){
+
+    const container =
+        document.getElementById("ideasList");
+
+    const data =
+        await getCollection("contentIdeas");
+
+
+    if(!data.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                No content ideas available yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(item => {
+
+            const title =
+                item.title ||
+                "Content Idea";
+
+            const description =
+                item.description ||
+                item.idea ||
+                "";
+
+
+            return `
+
+                <article class="card">
+
+                    <div class="icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(description)}
+                    </p>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText(
+                            '${escapeJS(description)}'
+                        )">
+                        📋 Copy Idea
+                    </button>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ================= SECURITY HELPERS ================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJS(value){
+
+    return String(value)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/\n/g,"\\n")
+        .replace(/\r/g,"");
+
+}
+
+
+/* ================= LOAD EVERYTHING ================= */
+
+async function loadPublicContent(){
+
+    await Promise.all([
+
+        loadTopContent(),
+        loadHashtags(),
+        loadPrompts(),
+        loadCountries(),
+        loadRPM(),
+        loadLocal(),
+        loadNews(),
+        loadIdeas()
+
+    ]);
+
+}
+
+
+loadPublicContent();
 
 </script>
 
