@@ -1,1 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MediaMonetize | Login</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+.login-box{
+    width:420px;
+    max-width:92%;
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.10);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 15px;
+    border-radius:16px;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.logo h1{
+    font-size:28px;
+}
+
+.logo h1 span{
+    color:#2563eb;
+}
+
+.logo p{
+    color:#64748b;
+    margin-top:7px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #dbe1ea;
+    border-radius:9px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#2563eb;
+}
+
+button{
+    width:100%;
+    border:0;
+    background:#2563eb;
+    color:white;
+    padding:13px;
+    border-radius:9px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:18px;
+    font-size:14px;
+}
+
+.message.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.message.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.footer{
+    text-align:center;
+    margin-top:22px;
+    color:#94a3b8;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            📈
+        </div>
+
+        <h1>Media<span>Monetize</span></h1>
+
+        <p>Social Media Monetization Platform</p>
+
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+            >
+
+        </div>
+
+        <button
+            id="loginBtn"
+            type="submit"
+        >
+            Login
+        </button>
+
+    </form>
+
+    <div class="footer">
+        MediaMonetize • Content & Monetization Management
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBDXnSHJmBqnZd97NCDuLAI6lcjLrdV3m4",
+
+    authDomain:
+        "social-monetization-os.firebaseapp.com",
+
+    projectId:
+        "social-monetization-os",
+
+    storageBucket:
+        "social-monetization-os.firebasestorage.app",
+
+    messagingSenderId:
+        "1041491811329",
+
+    appId:
+        "1:1041491811329:web:e60ef0d23c7d06bc403400"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+
+const form =
+    document.getElementById("loginForm");
+
+const button =
+    document.getElementById("loginBtn");
+
+const message =
+    document.getElementById("message");
+
+
+function showMessage(text,type){
+
+    message.innerText = text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* CHECK EXISTING LOGIN */
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(user){
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+});
+
+
+/* LOGIN */
+
+form.addEventListener(
+    "submit",
+    async(event)=>{
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email")
+            .value
+            .trim();
+
+        const password =
+            document.getElementById("password")
+            .value;
+
+
+        button.disabled = true;
+
+        button.innerText =
+            "Logging in...";
+
+
+        try{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            showMessage(
+                "Login successful! Opening dashboard...",
+                "success"
+            );
+
+            setTimeout(()=>{
+
+                window.location.href =
+                    "admin.html";
+
+            },700);
+
+
+        }catch(error){
+
+            console.error(error);
+
+            let text =
+                "Login failed. Please check your email and password.";
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                text =
+                    "Email ya password ghalat hai.";
+
+            }
+
+            if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                text =
+                    "Too many attempts. Thori dair baad try karo.";
+
+            }
+
+            showMessage(
+                text,
+                "error"
+            );
+
+        }
+
+
+        button.disabled = false;
+
+        button.innerText =
+            "Login";
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
